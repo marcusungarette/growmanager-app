@@ -1,13 +1,13 @@
 import React from 'react';
-import { CardHeader, CardGeet, Geetings, Image, Username } from './styles';
+import { CardHeader, CardGreet, Greetings, Image, Username } from './styles';
 
 export function Header() {
   return (
     <CardHeader>
-      <CardGeet>
-        <Geetings>Olá,</Geetings>
+      <CardGreet>
+        <Greetings>Olá,</Greetings>
         <Username>Marcus</Username>
-      </CardGeet>
+      </CardGreet>
       <Image source={require('../../assets/marcus.jpg')} />
     </CardHeader>
   );

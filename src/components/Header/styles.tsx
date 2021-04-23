@@ -8,9 +8,9 @@ export const CardHeader = styled.View`
   justify-content: space-between;
 `;
 
-export const CardGeet = styled.View``;
+export const CardGreet = styled.View``;
 
-export const Geetings = styled.Text`
+export const Greetings = styled.Text`
   font-size: ${theme.sizes.title};
   font-family: ${theme.family.text};
   color: ${theme.colors.heading};
