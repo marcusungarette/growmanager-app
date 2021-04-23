@@ -13,6 +13,7 @@ export const Wrapper = styled.SafeAreaView`
 `;
 
 export const Title = styled.Text`
+  font-family: ${theme.family.heading};
   font-size: ${theme.sizes.title};
   font-weight: bold;
   text-align: center;
@@ -26,7 +27,9 @@ export const Image = styled.Image`
 `;
 
 export const Subtitle = styled.Text`
+  font-family: ${theme.family.text};
   font-size: ${theme.sizes.medium};
+  color: ${theme.colors.heading};
   padding: 0px 20px;
   text-align: center;
   margin-bottom: 50px;
@@ -41,9 +44,4 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-`;
-
-export const ButtonText = styled.Text`
-  font-size: ${theme.sizes.medium};
-  text-align: center;
 `;

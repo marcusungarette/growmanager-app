@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Wrapper, Title, Image, Subtitle, Button } from './styles';
-
+import theme from '../../styles/theme';
 import Icon from 'react-native-vector-icons/Feather';
 import wateringImg from '../../assets/watering.png';
-import { ButtonText } from '../../components/Button/styles';
 
 Icon.loadFont();
 export function Welcome() {
@@ -31,8 +30,7 @@ export function Welcome() {
       </Subtitle>
 
       <Button onPress={handleNavigateToUserIdentification}>
-        {/* <Icon name="chevron-right" size={24} color={theme.colors.white} /> */}
-        <ButtonText> &gt; </ButtonText>
+        <Icon name="chevron-right" size={24} color={theme.colors.white} />
       </Button>
     </Wrapper>
   );

@@ -12,4 +12,5 @@ export const Btn = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   font-size: ${theme.sizes.subtitle};
   color: ${theme.colors.white};
+  font-family: ${theme.family.complement};
 `;

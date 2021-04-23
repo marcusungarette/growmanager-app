@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Wrapper, Form, Icon, Title, Input, Footer } from './styles';
 
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { SizedBox } from '../../components/SizedBox';
 import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
@@ -34,31 +35,33 @@ export function UserIdentification() {
 
   return (
     <Wrapper>
-      <Form>
-        <Icon>{isFilled ? '😄' : '😀'}</Icon>
-        <SizedBox height={24} width={0} />
-        <Title>
-          Como podemos {'\n'}
-          chamar você?
-        </Title>
-        <SizedBox height={40} width={0} />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Form>
+          <Icon>{isFilled ? '😄' : '😀'}</Icon>
+          <SizedBox height={24} width={0} />
+          <Title>
+            Como podemos {'\n'}
+            chamar você?
+          </Title>
+          <SizedBox height={40} width={0} />
 
-        <Input
-          style={{
-            borderColor:
-              isFocused || isFilled ? theme.colors.green : theme.colors.gray,
-          }}
-          placeholder="Digite um nome"
-          onFocus={handleFocused}
-          onBlur={handleBlur}
-          onChangeText={handleChange}
-        />
+          <Input
+            style={{
+              borderColor:
+                isFocused || isFilled ? theme.colors.green : theme.colors.gray,
+            }}
+            placeholder="Digite um nome"
+            onFocus={handleFocused}
+            onBlur={handleBlur}
+            onChangeText={handleChange}
+          />
 
-        <SizedBox height={40} width={0} />
-        <Footer>
-          <Button title="Confirmar" onPress={handleNavigateToConfirmation} />
-        </Footer>
-      </Form>
+          <SizedBox height={40} width={0} />
+          <Footer>
+            <Button title="Confirmar" onPress={handleNavigateToConfirmation} />
+          </Footer>
+        </Form>
+      </TouchableWithoutFeedback>
     </Wrapper>
   );
 }
