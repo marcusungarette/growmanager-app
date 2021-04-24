@@ -27,6 +27,7 @@ export function PlantSelect() {
       <Environment>
         <FlatListEnvironment
           data={[1, 2, 3, 4, 5]}
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           renderItem={({ item }) => (
             <EnvironmentButton title="Cozinha" isActive />
           )}
