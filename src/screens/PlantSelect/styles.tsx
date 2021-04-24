@@ -27,3 +27,11 @@ export const Environment = styled.View`
 `;
 
 export const FlatListEnvironment = styled.FlatList``;
+
+export const Plants = styled.View`
+  flex: 1;
+  padding: 0px 32px;
+  justify-content: center;
+`;
+
+export const FlatListPlants = styled.FlatList``;

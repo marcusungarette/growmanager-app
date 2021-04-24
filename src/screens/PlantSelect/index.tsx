@@ -7,17 +7,34 @@ import {
   HeaderPlants,
   Environment,
   FlatListEnvironment,
+  Plants,
+  FlatListPlants,
 } from './styles';
 import { Header } from '../../components/Header';
 import { EnvironmentButton } from '../../components/EnviromentButton';
 import api from '../../services/api';
+import { PlantCardPrimary } from '../../components/PlantCardPrimary';
 
 interface EnvironmentProps {
   key: string;
   title: string;
 }
+
+interface PlantProps {
+  id: string;
+  name: string;
+  about: string;
+  water_tips: string;
+  photo: string;
+  environments: [string];
+  frequency: {
+    times: number;
+    repeat_every: string;
+  };
+}
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
+  const [plants, setPlants] = useState<PlantProps[]>([]);
 
   useEffect(() => {
     async function fetchEnvironment() {
@@ -34,6 +51,15 @@ export function PlantSelect() {
     fetchEnvironment();
   }, []);
 
+  useEffect(() => {
+    async function fetchPlants() {
+      const { data } = await api.get('plants');
+      setPlants(data);
+    }
+
+    fetchPlants();
+  }, []);
+
   return (
     <Wrapper>
       <HeaderPlants>
@@ -43,9 +69,7 @@ export function PlantSelect() {
         <Title>Em qual ambiente</Title>
         <SubTitle>você quer colocar sua planta?</SubTitle>
       </HeaderPlants>
-
       <SizedBox height={24} width={0} />
-
       <Environment>
         <FlatListEnvironment
           data={environments}
@@ -58,6 +82,13 @@ export function PlantSelect() {
           contentContainerStyle={{ marginLeft: 20, paddingRight: 20 }}
         />
       </Environment>
+      <SizedBox height={40} width={0} />
+      <Plants>
+        <FlatListPlants
+          data={plants}
+          renderItem={({ item }: any) => <PlantCardPrimary data={item} />}
+        />
+      </Plants>
     </Wrapper>
   );
 }
