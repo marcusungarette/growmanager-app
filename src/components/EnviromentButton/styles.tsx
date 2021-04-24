@@ -3,7 +3,7 @@ import { TouchableOpacityProps, TextProps } from 'react-native';
 import theme from '../../styles/theme';
 
 interface TouchableType extends TouchableOpacityProps {
-  color: string;
+  color?: string;
   isActive: boolean;
 }
 
@@ -20,7 +20,7 @@ export const Touchable = styled.TouchableOpacity<TouchableType>`
   margin: 0 5px;
   background: ${props =>
     props.isActive ? `${theme.colors.green_light}` : `${theme.colors.shape}`};
-  opacity: ${props => (props.isActive ? '0.2' : '1')};
+  opacity: ${props => (props.isActive ? '1' : '0.2')};
 `;
 
 export const Text = styled.Text<TextType>`

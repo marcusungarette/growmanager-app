@@ -4,7 +4,7 @@ import { TouchableOpacityProps } from 'react-native';
 
 interface EnvironmentButtonProps extends TouchableOpacityProps {
   title: string;
-  color: string;
+  color?: string;
   isActive?: boolean;
 }
 

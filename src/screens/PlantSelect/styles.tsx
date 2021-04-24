@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+// import { FlatList } from 'react-native';
 import theme from '../../styles/theme';
 
 export const Wrapper = styled.SafeAreaView`
@@ -20,3 +21,9 @@ export const SubTitle = styled.Text`
   font-family: ${theme.family.text};
   color: ${theme.colors.heading};
 `;
+
+export const Environment = styled.View`
+  height: 40px;
+`;
+
+export const FlatListEnvironment = styled.FlatList``;
