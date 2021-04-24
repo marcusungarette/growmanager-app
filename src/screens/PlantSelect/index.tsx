@@ -14,6 +14,7 @@ import { Header } from '../../components/Header';
 import { EnvironmentButton } from '../../components/EnviromentButton';
 import api from '../../services/api';
 import { PlantCardPrimary } from '../../components/PlantCardPrimary';
+import { Load } from '../../components/Load';
 
 interface EnvironmentProps {
   key: string;
@@ -35,10 +36,21 @@ interface PlantProps {
 export function PlantSelect() {
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
   const [plants, setPlants] = useState<PlantProps[]>([]);
+  const [filteredPlants, setfilteredPlants] = useState<PlantProps[]>([]);
   const [environmentSelected, setEnvironmentSelected] = useState('all');
+  const [loading, setLoading] = useState(true);
 
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment);
+
+    if (environment === 'all') {
+      return setfilteredPlants(plants);
+    }
+    const filtered = plants.filter(plant =>
+      plant.environments.includes(environment),
+    );
+
+    setfilteredPlants(filtered);
   }
 
   useEffect(() => {
@@ -62,10 +74,16 @@ export function PlantSelect() {
     async function fetchPlants() {
       const { data } = await api.get('plants?_sort=name&_order=asc');
       setPlants(data);
+      setfilteredPlants(data);
+      setLoading(false);
     }
 
     fetchPlants();
   }, []);
+
+  if (loading) {
+    return <Load />;
+  }
 
   return (
     <Wrapper>
@@ -96,7 +114,7 @@ export function PlantSelect() {
       <SizedBox height={40} width={0} />
       <Plants>
         <FlatListPlants
-          data={plants}
+          data={filteredPlants}
           renderItem={({ item }: any) => <PlantCardPrimary data={item} />}
           showsVerticalScrollIndicator={false}
           numColumns={2}
