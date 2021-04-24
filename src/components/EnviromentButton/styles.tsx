@@ -20,7 +20,7 @@ export const Touchable = styled.TouchableOpacity<TouchableType>`
   margin: 0 5px;
   background: ${props =>
     props.isActive ? `${theme.colors.green_light}` : `${theme.colors.shape}`};
-  opacity: ${props => (props.isActive ? '1' : '0.2')};
+  opacity: ${props => (props.isActive ? '1' : '1')};
 `;
 
 export const Text = styled.Text<TextType>`

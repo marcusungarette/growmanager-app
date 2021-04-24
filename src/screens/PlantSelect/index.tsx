@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SizedBox } from '../../components/SizedBox';
 import {
   Title,
@@ -10,8 +10,30 @@ import {
 } from './styles';
 import { Header } from '../../components/Header';
 import { EnvironmentButton } from '../../components/EnviromentButton';
+import api from '../../services/api';
 
+interface EnvironmentProps {
+  key: string;
+  title: string;
+}
 export function PlantSelect() {
+  const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
+
+  useEffect(() => {
+    async function fetchEnvironment() {
+      const { data } = await api.get('plants_environments');
+      setEnvironments([
+        {
+          key: 'all',
+          title: 'Todos',
+        },
+        ...data,
+      ]);
+    }
+
+    fetchEnvironment();
+  }, []);
+
   return (
     <Wrapper>
       <HeaderPlants>
@@ -26,10 +48,9 @@ export function PlantSelect() {
 
       <Environment>
         <FlatListEnvironment
-          data={[1, 2, 3, 4, 5]}
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          renderItem={({ item }) => (
-            <EnvironmentButton title="Cozinha" isActive />
+          data={environments}
+          renderItem={({ item }: any) => (
+            <EnvironmentButton title={item.title} />
           )}
           horizontal
           showsHorizontalScrollIndicator={false}
