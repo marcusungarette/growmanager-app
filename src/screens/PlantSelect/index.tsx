@@ -3,6 +3,7 @@ import { SizedBox } from '../../components/SizedBox';
 import {} from 'react-native';
 import { Title, Wrapper, SubTitle, HeaderPlants } from './styles';
 import { Header } from '../../components/Header';
+import { EnvironmentButton } from '../../components/EnviromentButton';
 
 export function PlantSelect() {
   return (
@@ -14,6 +15,7 @@ export function PlantSelect() {
         <Title>Em qual ambiente</Title>
         <SubTitle>você quer colocar sua planta?</SubTitle>
       </HeaderPlants>
+      <EnvironmentButton title="Cozinha" color={''} />
     </Wrapper>
   );
 }
