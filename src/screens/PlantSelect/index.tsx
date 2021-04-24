@@ -87,6 +87,8 @@ export function PlantSelect() {
         <FlatListPlants
           data={plants}
           renderItem={({ item }: any) => <PlantCardPrimary data={item} />}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
         />
       </Plants>
     </Wrapper>

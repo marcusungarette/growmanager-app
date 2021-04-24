@@ -14,7 +14,7 @@ export const Touchable = styled.TouchableOpacity<TouchableType>`
   max-width: 45%;
   background-color: ${theme.colors.shape};
   border-radius: 20px;
-  padding: 0 10px;
+  padding: 10px 10px;
   align-items: center;
   margin: 10px;
 `;
