@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Wrapper, Form, Icon, Title, Input, Footer } from './styles';
 
@@ -29,10 +30,13 @@ export function UserIdentification() {
     setName(value);
   }
 
-  function handleNavigateToConfirmation() {
+  async function handleNavigateToConfirmation() {
     if (!name) {
       return Alert.alert('Por favor, antes de prosseguir digite seu nome...🥺');
     }
+
+    await AsyncStorage.setItem('@growmanager:user', name);
+
     navigation.navigate('Confirmation');
   }
 
