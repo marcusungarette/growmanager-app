@@ -35,3 +35,5 @@ export const Plants = styled.View`
 `;
 
 export const FlatListPlants = styled.FlatList``;
+
+export const LoadActive = styled.ActivityIndicator``;
