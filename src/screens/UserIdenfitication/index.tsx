@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Wrapper, Form, Icon, Title, Input, Footer } from './styles';
 
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import { SizedBox } from '../../components/SizedBox';
 import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
@@ -30,6 +30,9 @@ export function UserIdentification() {
   }
 
   function handleNavigateToConfirmation() {
+    if (!name) {
+      return Alert.alert('Por favor, antes de prosseguir digite seu nome...🥺');
+    }
     navigation.navigate('Confirmation');
   }
 
