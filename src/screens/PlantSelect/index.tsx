@@ -15,7 +15,7 @@ import { Header } from '../../components/Header';
 import { EnvironmentButton } from '../../components/EnviromentButton';
 import api from '../../services/api';
 import { PlantCardPrimary } from '../../components/PlantCardPrimary';
-// import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 import { Load } from '../../components/Load';
 import theme from '../../styles/theme';
 
@@ -47,7 +47,7 @@ export function PlantSelect() {
 
   const [loadingMore, setLoadingMore] = useState(false);
 
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   async function fetchEnvironment() {
     const data = await api.fetchEnvironment();
@@ -104,9 +104,9 @@ export function PlantSelect() {
     setFilteredPlants(filtered);
   }
 
-  // function navigateToPlantSave(plant: PlantProps) {
-  //   navigation.navigate('PlantSave', { plant });
-  // }
+  function handlePlantSelect(plant: PlantProps) {
+    navigation.navigate('PlantSave', { plant });
+  }
 
   useEffect(() => {
     fetchEnvironment();
@@ -154,7 +154,12 @@ export function PlantSelect() {
           data={filteredPlants}
           //@ts-ignore
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }: any) => <PlantCardPrimary data={item} />}
+          renderItem={({ item }: any) => (
+            <PlantCardPrimary
+              data={item}
+              onPress={() => handlePlantSelect(item)}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           onEndReachedThreshold={0.1}
