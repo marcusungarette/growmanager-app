@@ -34,10 +34,12 @@ export function UserIdentification() {
     if (!name) {
       return Alert.alert('Por favor, antes de prosseguir digite seu nome...🥺');
     }
-
-    await AsyncStorage.setItem('@growmanager:user', name);
-
-    navigation.navigate('Confirmation');
+    try {
+      await AsyncStorage.setItem('@growmanager:user', name);
+      navigation.navigate('Confirmation');
+    } catch (error) {
+      Alert.alert('Nao foi possivel salvar o seu nome');
+    }
   }
 
   return (

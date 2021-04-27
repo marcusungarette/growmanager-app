@@ -22,20 +22,10 @@ import waterdrop from '../../assets/waterdrop.png';
 import { SizedBox } from '../../components/SizedBox';
 import { Button } from '../../components/Button';
 import { Alert, Platform } from 'react-native';
+import { PlantProps, savePlant } from '../../libs/storage';
 
 interface Params {
-  plant: {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-      times: number;
-      repeat_every: string;
-    };
-  };
+  plant: PlantProps;
 }
 
 export function PlantSave() {
@@ -62,6 +52,17 @@ export function PlantSave() {
 
   function handleOpenDatetimePickerForAndroid() {
     setShowDatePicker(oldState => !oldState);
+  }
+
+  async function handleSave() {
+    try {
+      await savePlant({
+        ...plant,
+        dateTimeNotification: selectedDateTime,
+      });
+    } catch (error) {
+      return Alert.alert('Nao foi possivel salvar!');
+    }
   }
 
   return (
@@ -104,12 +105,7 @@ export function PlantSave() {
             </DateTimePickerButton>
           )}
           <SizedBox height={30} width={0} />
-          <Button
-            title="Cadastrar planta"
-            onPress={() => {
-              'ola';
-            }}
-          />
+          <Button title="Cadastrar planta" onPress={handleSave} />
           <SizedBox height={20} width={0} />
         </Controller>
       </Container>
