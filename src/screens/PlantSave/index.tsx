@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Wrapper,
   PlantInfo,
@@ -8,15 +8,20 @@ import {
   CardTipContainer,
   CardTipImage,
   CardTipText,
+  DateTimePickerButton,
+  DateTimePickerText,
   AlertLabel,
   Container,
 } from './styles';
 
 import { useRoute } from '@react-navigation/core';
 import { SvgFromUri } from 'react-native-svg';
+import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
+import { isBefore, format } from 'date-fns';
 import waterdrop from '../../assets/waterdrop.png';
 import { SizedBox } from '../../components/SizedBox';
 import { Button } from '../../components/Button';
+import { Alert, Platform } from 'react-native';
 
 interface Params {
   plant: {
@@ -34,8 +39,30 @@ interface Params {
 }
 
 export function PlantSave() {
+  const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
+
   const route = useRoute();
   const { plant } = route.params as Params;
+
+  function handleChangeTime(event: Event, dateTime: Date | undefined) {
+    if (Platform.OS === 'android') {
+      setShowDatePicker(oldState => !oldState);
+    }
+
+    if (dateTime && isBefore(dateTime, new Date())) {
+      setSelectedDateTime(new Date());
+      return Alert.alert('Escolha uma hora no futuro!');
+    }
+
+    if (dateTime) {
+      setSelectedDateTime(dateTime);
+    }
+  }
+
+  function handleOpenDatetimePickerForAndroid() {
+    setShowDatePicker(oldState => !oldState);
+  }
 
   return (
     <Wrapper showsVerticalScrollIndicator={false}>
@@ -61,7 +88,21 @@ export function PlantSave() {
           <AlertLabel>Escolha o melhor horário para ser lembrado:</AlertLabel>
 
           <SizedBox height={30} width={0} />
-
+          {showDatePicker && (
+            <DateTimePicker
+              value={selectedDateTime}
+              mode="time"
+              display="spinner"
+              onChange={handleChangeTime}
+            />
+          )}
+          {Platform.OS === 'android' && (
+            <DateTimePickerButton onPress={handleOpenDatetimePickerForAndroid}>
+              <DateTimePickerText>
+                {`Mudar alarme ${format(selectedDateTime, 'HH:mm')}`}
+              </DateTimePickerText>
+            </DateTimePickerButton>
+          )}
           <SizedBox height={30} width={0} />
           <Button
             title="Cadastrar planta"
