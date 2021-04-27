@@ -12,22 +12,41 @@ import {
   Container,
 } from './styles';
 
-// import { SvgFromUri } from 'react-native-svg';
+import { useRoute } from '@react-navigation/core';
+import { SvgFromUri } from 'react-native-svg';
 import waterdrop from '../../assets/waterdrop.png';
 import { SizedBox } from '../../components/SizedBox';
 import { Button } from '../../components/Button';
 
+interface Params {
+  plant: {
+    id: string;
+    name: string;
+    about: string;
+    water_tips: string;
+    photo: string;
+    environments: [string];
+    frequency: {
+      times: number;
+      repeat_every: string;
+    };
+  };
+}
+
 export function PlantSave() {
+  const route = useRoute();
+  const { plant } = route.params as Params;
+
   return (
     <Wrapper showsVerticalScrollIndicator={false}>
       <Container>
         <PlantInfo>
-          {/* <SvgFromUri uri={plant.photo} height={180} width={180} /> */}
+          <SvgFromUri uri={plant.photo} height={180} width={180} />
 
-          <PlantName>Lorem, ipsum.</PlantName>
+          <PlantName>{plant.name}</PlantName>
 
           <SizedBox height={16} width={0} />
-          <PlantAbout>Lorem, ipsum.</PlantAbout>
+          <PlantAbout>{plant.about}</PlantAbout>
         </PlantInfo>
 
         <SizedBox height={32} width={0} />
@@ -36,7 +55,7 @@ export function PlantSave() {
             <CardTipImage source={waterdrop} />
 
             <SizedBox height={0} width={24} />
-            <CardTipText>Lorem, ipsum.</CardTipText>
+            <CardTipText>{plant.water_tips}</CardTipText>
           </CardTipContainer>
 
           <AlertLabel>Escolha o melhor horário para ser lembrado:</AlertLabel>
